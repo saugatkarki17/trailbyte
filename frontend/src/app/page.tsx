@@ -128,9 +128,7 @@ export default function Page() {
           <a className="text-sm text-gray-200/80 transition hover:text-white" href="#services">
             Services
           </a>
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="#timeline">
-            Timeline
-          </a>
+        
           <a className="text-sm text-gray-200/80 transition hover:text-white" href="#contact">
             Contact
           </a>

@@ -62,6 +62,7 @@ function BGPanel({
   className = "",
   contentClass = "p-6 sm:p-7 lg:p-8",
   children,
+  
 }: BGPanelProps) {
   return (
     <section
@@ -490,7 +491,7 @@ export default function Page() {
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <label className="flex flex-col gap-1">
-                      <span className="text-xs tracking-wide text-gray-200/80">Name</span>
+                      <span className="text-xs tracking-wide text-gray-100">Name</span>
                       <input
                         type="text"
                         name="name"
@@ -500,7 +501,7 @@ export default function Page() {
                       />
                     </label>
                     <label className="flex flex-col gap-1">
-                      <span className="text-xs tracking-wide text-gray-200/80">Email</span>
+                      <span className="text-xs tracking-wide text-gray-100">Email</span>
                       <input
                         type="email"
                         name="email"
@@ -510,7 +511,7 @@ export default function Page() {
                       />
                     </label>
                     <label className="flex flex-col gap-1 sm:col-span-2">
-                      <span className="text-xs tracking-wide text-gray-200/80">Company / Website</span>
+                      <span className="text-xs tracking-wide text-gray-100">Company / Website</span>
                       <input
                         type="text"
                         name="company"
@@ -530,7 +531,7 @@ export default function Page() {
                     >
                       Send message <ArrowIcon className="h-4 w-4" />
                     </button>
-                    <span className="text-xs text-gray-200/70">We’ll reply within one business day.</span>
+                    <span className="text-xs text-gray-200/90">We’ll reply within one business day.</span>
                   </div>
 
                   {/* toast */}
@@ -736,7 +737,7 @@ function MessageWithMeter() {
 
   return (
     <label className="flex flex-col gap-1 sm:col-span-2">
-      <span className="text-xs tracking-wide text-gray-200/80">Message</span>
+      <span className="text-xs tracking-wide text-gray-1000">Message</span>
       <textarea
         name="message"
         rows={4}
@@ -748,7 +749,7 @@ function MessageWithMeter() {
       />
       {/* fun element: “encryption meter” */}
       <div className="mt-1 flex items-center justify-between">
-        <span className="text-[11px] uppercase tracking-widest text-gray-200/70">Encryption Level</span>
+        <span className="text-[11px] uppercase tracking-widest text-gray-100">Encryption Level</span>
         <span className="text-[11px] text-gray-200/80">{score}%</span>
       </div>
       <div className="tb-meter-pulse mt-1 h-2 w-full overflow-hidden rounded-full bg-white/10">

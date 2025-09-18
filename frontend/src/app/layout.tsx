@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TRAILBYTE",
   description: "THE GUIDE FOR YOUR BUSINESS’S DIGITAL JOURNEY",
+  
 };
 
 export default function RootLayout({

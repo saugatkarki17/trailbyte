@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import SiteNav from "./components/SiteNav";
+import SiteFooter from "./components/SiteFooter";
 
 /* -----------------------------------------------------------
    Reusable background containers (no hero usage)
@@ -62,7 +64,6 @@ function BGPanel({
   className = "",
   contentClass = "p-6 sm:p-7 lg:p-8",
   children,
-  
 }: BGPanelProps) {
   return (
     <section
@@ -94,8 +95,6 @@ function BGPanel({
 ------------------------------------------------------------ */
 
 export default function Page() {
-  const [open, setOpen] = useState(false);
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0C1B2A] text-gray-200">
       {/* Background accents */}
@@ -107,93 +106,10 @@ export default function Page() {
         className="pointer-events-none absolute inset-0 opacity-[0.08] [background:repeating-linear-gradient(90deg,transparent,transparent_12px,rgba(255,255,255,.06)_12px,rgba(255,255,255,.06)_13px)]"
       />
 
-      {/* NAVBAR */}
-      <nav className="relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2">
-          <img
-            src="/logo.png"
-            alt="Trailbyte logo"
-            className="h-20 w-auto translate-y-2.5"
-            draggable={false}
-          />
-        </div>
+      {/* Reusable NAVBAR */}
+      <SiteNav />
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-8 md:flex">
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="#">
-            Home
-          </a>
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="#about">
-            About
-          </a>
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="#services">
-            Services
-          </a>
-        
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="#contact">
-            Contact
-          </a>
-        </div>
-
-        {/* Desktop actions */}
-        <div className="hidden items-center gap-3 md:flex">
-          <button className="rounded-xl border border-white/10 px-4 py-2 text-sm text-gray-200/85 backdrop-blur-sm transition hover:bg-white/10">
-            Log in
-          </button>
-          <button className="rounded-xl bg-[#174A3A] px-4 py-2 text-sm font-medium text-[#F7F5EF] shadow-[0_8px_30px_-10px_rgba(23,74,58,0.6)] transition hover:brightness-110">
-            Sign Up
-          </button>
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          aria-label="menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden rounded-lg border border-white/10 p-2 text-gray-200/80"
-        >
-          <MenuIcon className="h-5 w-5" />
-        </button>
-      </nav>
-
-      {/* Mobile dropdown */}
-      {open && (
-        <div className="md:hidden relative z-10 mx-4 mt-2 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-          <div className="flex flex-col gap-4 text-sm">
-            <a className="text-gray-100" href="#" onClick={() => setOpen(false)}>
-              Home
-            </a>
-            <a className="text-gray-100" href="#about" onClick={() => setOpen(false)}>
-              About
-            </a>
-            <a className="text-gray-100" href="#services" onClick={() => setOpen(false)}>
-              Services
-            </a>
-            <a className="text-gray-100" href="#timeline" onClick={() => setOpen(false)}>
-              Timeline
-            </a>
-            <a className="text-gray-100" href="#contact" onClick={() => setOpen(false)}>
-              Contact
-            </a>
-            <div className="mt-2 grid grid-cols-2 gap-3">
-              <button
-                className="rounded-xl bg-white/5 px-3 py-2 text-gray-100 ring-1 ring-white/10 transition hover:bg-white/10"
-                onClick={() => setOpen(false)}
-              >
-                Log in
-              </button>
-              <button
-                className="rounded-xl bg-[#174A3A] px-3 py-2 font-medium text-[#F7F5EF] shadow-[0_10px_40px_-12px_rgba(23,74,58,0.6)] transition hover:brightness-110"
-                onClick={() => setOpen(false)}
-              >
-                Sign Up
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===== HERO (unchanged, no images here) ===== */}
+      {/* ===== HERO (unchanged) ===== */}
       <section className="relative z-10 mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-9 lg:pb-20">
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
           {/* Left: Title */}
@@ -210,7 +126,7 @@ export default function Page() {
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a
-                href="#services"
+                href="/services"
                 className="rounded-2xl bg-white/5 px-5 py-3 text-sm text-[#F7F5EF] ring-1 ring-white/10 backdrop-blur-md transition hover:bg-white/10"
               >
                 Explore Services
@@ -286,7 +202,7 @@ export default function Page() {
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <a
-                href="#services"
+                href="/services"
                 className="rounded-2xl bg-[#174A3A] px-5 py-3 text-sm font-medium text-[#F7F5EF] shadow-[0_8px_30px_-12px_rgba(23,74,58,0.6)] transition hover:brightness-110"
               >
                 Discover More
@@ -330,7 +246,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== TIMELINE (with low-contrast background image) ===== */}
+      {/* ===== TIMELINE ===== */}
       <section id="timeline" className="relative z-10 mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-9">
         <header className="mb-8">
           <p className="mb-2 text-xs tracking-[0.2em] text-gray-200/60">THE TRAILBYTE METHOD</p>
@@ -394,7 +310,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== SERVICES (only section with card hover) ===== */}
+      {/* ===== SERVICES ===== */}
       <section id="services" className="relative z-10 mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-9">
         <header className="mb-6">
           <p className="mb-2 text-xs tracking-[0.2em] text-gray-200/60">OUR SERVICES</p>
@@ -442,7 +358,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ===== CONTACT / MESSAGE (with fun meter) ===== */}
+      {/* ===== CONTACT ===== */}
       <section id="contact" className="relative z-10 mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-9">
         <ImageBand
           src="/TrailbyteDigitalGuide.png"
@@ -554,73 +470,8 @@ export default function Page() {
         </ImageBand>
       </section>
 
-      {/* ===== FOOTER ===== */}
-      <footer className="relative z-10 border-t border-white/10 bg-white/[0.03]">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-9">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <img src="/logo.png" alt="Trailbyte logo" className="h-7 w-auto" />
-                <span className="text-sm font-semibold tracking-wide text-white">TRAILBYTE</span>
-              </div>
-              <p className="mt-3 max-w-[40ch] text-sm text-gray-200/85">
-                Pragmatic cybersecurity &amp; data governance—designed for speed, built for audit.
-              </p>
-              <div className="mt-4 flex items-center gap-3">
-                <a href="#" aria-label="GitHub" className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
-                  <GitHubIcon className="h-4 w-4" />
-                </a>
-                <a href="#" aria-label="LinkedIn" className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
-                  <LinkedInIcon className="h-4 w-4" />
-                </a>
-                <a href="#" aria-label="X" className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
-                  <XIcon className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <div className="text-sm font-semibold text-white">Services</div>
-              <ul className="mt-3 space-y-2 text-sm text-gray-200/85">
-                <li><a href="#services" className="hover:underline underline-offset-2">Cyber Shield</a></li>
-                <li><a href="#services" className="hover:underline underline-offset-2">Data Guard</a></li>
-                <li><a href="#services" className="hover:underline underline-offset-2">Digital Evolution</a></li>
-                <li><a href="#services" className="hover:underline underline-offset-2">CIO Advisory</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <div className="text-sm font-semibold text-white">Company</div>
-              <ul className="mt-3 space-y-2 text-sm text-gray-200/85">
-                <li><a href="#about" className="hover:underline underline-offset-2">About</a></li>
-                <li><a href="#timeline" className="hover:underline underline-offset-2">Method</a></li>
-                <li><a href="#contact" className="hover:underline underline-offset-2">Contact</a></li>
-                <li><a href="#" className="hover:underline underline-offset-2">Careers</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <div className="text-sm font-semibold text-white">Contact</div>
-              <ul className="mt-3 space-y-2 text-sm text-gray-200/85">
-                <li className="inline-flex items-center gap-2">
-                  <MailIcon className="h-4 w-4" />{" "}
-                  <a href="mailto:hello@trailbyte.io" className="hover:underline underline-offset-2">hello@trailbyte.io</a>
-                </li>
-                <li>San Francisco, CA</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-gray-200/70 sm:flex-row">
-            <span>© {new Date().getFullYear()} Trailbyte. All rights reserved.</span>
-            <div className="flex items-center gap-4">
-              <a href="#" className="hover:underline underline-offset-2">Privacy</a>
-              <a href="#" className="hover:underline underline-offset-2">Terms</a>
-              <a href="#contact" className="hover:underline underline-offset-2">Report an issue</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/* Reusable FOOTER */}
+      <SiteFooter />
     </main>
   );
 }
@@ -761,7 +612,7 @@ function MessageWithMeter() {
   );
 }
 
-/* === Icons === */
+/* === Icons used on this page (keep identical) === */
 
 function MountainIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -798,14 +649,6 @@ function ShieldIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
-      <path d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  );
-}
-
 function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
@@ -814,6 +657,7 @@ function MailIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
 function ArrowIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
@@ -821,31 +665,11 @@ function ArrowIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
 function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
       <path strokeWidth="1.5" d="m5 13 4 4L19 7" />
-    </svg>
-  );
-}
-function GitHubIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M12 1.8a10.2 10.2 0 0 0-3.22 19.87c.51.09.7-.22.7-.49l-.01-1.7c-2.86.63-3.46-1.21-3.46-1.21-.46-1.18-1.12-1.5-1.12-1.5-.91-.63.07-.62.07-.62 1 .07 1.52 1.05 1.52 1.05.9 1.56 2.36 1.11 2.94.85.09-.66.35-1.11.63-1.36-2.28-.26-4.68-1.14-4.68-5.09 0-1.12.4-2.03 1.05-2.75-.11-.26-.46-1.31.1-2.74 0 0 .86-.28 2.82 1.05a9.73 9.73 0 0 1 5.14 0c1.96-1.33 2.82-1.05 2.82-1.05.56 1.43.21 2.48.1 2.74.65.72 1.05 1.63 1.05 2.75 0 3.96-2.4 4.82-4.69 5.07.36.31.68.93.68 1.88l-.01 2.78c0 .27.18.58.71.48A10.2 10.2 0 0 0 12 1.8Z" />
-    </svg>
-  );
-}
-function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M4.98 3.5a2.5 2.5 0 1 0 .02 5 2.5 2.5 0 0 0-.02-5ZM3.5 8.98h2.96V20.5H3.5zM9.02 8.98h2.84v1.59h.04c.4-.76 1.39-1.56 2.86-1.56 3.06 0 3.62 2.02 3.62 4.65v6.84h-2.96v-6.07c0-1.45-.03-3.32-2.02-3.32-2.02 0-2.33 1.58-2.33 3.22v6.17H9.02z" />
-    </svg>
-  );
-}
-function XIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M4 3.5h3.2l5.06 6.66L16.9 3.5H20l-7 8.7 7.5 8.3h-3.2l-5.3-6.83-5 6.83H2.5l7.25-8.6L4 3.5Z" />
     </svg>
   );
 }

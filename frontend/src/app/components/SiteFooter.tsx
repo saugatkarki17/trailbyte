@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 export default function SiteFooter() {
   return (
@@ -16,13 +17,25 @@ export default function SiteFooter() {
               Pragmatic cybersecurity &amp; data governance—designed for speed, built for audit.
             </p>
             <div className="mt-4 flex items-center gap-3">
-              <a href="#" aria-label="GitHub" className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
+              <a
+                href="#"
+                aria-label="GitHub"
+                className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10"
+              >
                 <GitHubIcon className="h-4 w-4" />
               </a>
-              <a href="#" aria-label="LinkedIn" className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10"
+              >
                 <LinkedInIcon className="h-4 w-4" />
               </a>
-              <a href="#" aria-label="X" className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
+              <a
+                href="#"
+                aria-label="X"
+                className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10"
+              >
                 <XIcon className="h-4 w-4" />
               </a>
             </div>
@@ -31,19 +44,19 @@ export default function SiteFooter() {
           <div>
             <div className="text-sm font-semibold text-white">Services</div>
             <ul className="mt-3 space-y-2 text-sm text-gray-200/85">
-              <li><a href="/services" className="hover:underline underline-offset-2">Cyber Shield</a></li>
-              <li><a href="/services" className="hover:underline underline-offset-2">Data Guard</a></li>
-              <li><a href="/services" className="hover:underline underline-offset-2">Digital Evolution</a></li>
-              <li><a href="/services" className="hover:underline underline-offset-2">CIO Advisory</a></li>
+              <li><Link href="/services" className="hover:underline underline-offset-2">Cyber Shield</Link></li>
+              <li><Link href="/services" className="hover:underline underline-offset-2">Data Guard</Link></li>
+              <li><Link href="/services" className="hover:underline underline-offset-2">Digital Evolution</Link></li>
+              <li><Link href="/services" className="hover:underline underline-offset-2">CIO Advisory</Link></li>
             </ul>
           </div>
 
           <div>
             <div className="text-sm font-semibold text-white">Company</div>
             <ul className="mt-3 space-y-2 text-sm text-gray-200/85">
-              <li><a href="/about" className="hover:underline underline-offset-2">About</a></li>
-              <li><a href="/Services" className="hover:underline underline-offset-2">Services</a></li>
-              <li><a href="/contact" className="hover:underline underline-offset-2">Contact</a></li>
+              <li><Link href="/about" className="hover:underline underline-offset-2">About</Link></li>
+              <li><Link href="/services" className="hover:underline underline-offset-2">Services</Link></li>
+              <li><Link href="/contact" className="hover:underline underline-offset-2">Contact</Link></li>
               <li><a href="#" className="hover:underline underline-offset-2">Careers</a></li>
             </ul>
           </div>
@@ -53,7 +66,9 @@ export default function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm text-gray-200/85">
               <li className="inline-flex items-center gap-2">
                 <MailIcon className="h-4 w-4" />{" "}
-                <a href="mailto:hello@trailbyte.io" className="hover:underline underline-offset-2">hello@trailbyte.io</a>
+                <a href="mailto:hello@trailbyte.io" className="hover:underline underline-offset-2">
+                  hello@trailbyte.io
+                </a>
               </li>
               <li>San Francisco, CA</li>
             </ul>
@@ -65,7 +80,7 @@ export default function SiteFooter() {
           <div className="flex items-center gap-4">
             <a href="#" className="hover:underline underline-offset-2">Privacy</a>
             <a href="#" className="hover:underline underline-offset-2">Terms</a>
-            <a href="/#contact" className="hover:underline underline-offset-2">Report an issue</a>
+            <Link href="/#contact" className="hover:underline underline-offset-2">Report an issue</Link>
           </div>
         </div>
       </div>

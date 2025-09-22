@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 export default function SiteNav() {
   const [open, setOpen] = React.useState(false);
@@ -20,18 +21,18 @@ export default function SiteNav() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-8 md:flex">
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="/">
+          <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/">
             Home
-          </a>
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="/about">
+          </Link>
+          <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/about">
             About
-          </a>
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="/services">
+          </Link>
+          <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/services">
             Services
-          </a>
-          <a className="text-sm text-gray-200/80 transition hover:text-white" href="/contact">
+          </Link>
+          <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/contact">
             Contact
-          </a>
+          </Link>
         </div>
 
         {/* Desktop actions */}
@@ -59,21 +60,19 @@ export default function SiteNav() {
       {open && (
         <div className="md:hidden relative z-10 mx-4 mt-2 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
           <div className="flex flex-col gap-4 text-sm">
-            <a className="text-gray-100" href="/" onClick={() => setOpen(false)}>
+            <Link className="text-gray-100" href="/" onClick={() => setOpen(false)}>
               Home
-            </a>
-            <a className="text-gray-100" href="/about" onClick={() => setOpen(false)}>
+            </Link>
+            <Link className="text-gray-100" href="/about" onClick={() => setOpen(false)}>
               About
-            </a>
-            <a className="text-gray-100" href="/services" onClick={() => setOpen(false)}>
+            </Link>
+            <Link className="text-gray-100" href="/services" onClick={() => setOpen(false)}>
               Services
-            </a>
-            <a className="text-gray-100" href="/#timeline" onClick={() => setOpen(false)}>
-              Timeline
-            </a>
-            <a className="text-gray-100" href="/contact" onClick={() => setOpen(false)}>
+            </Link>
+            
+            <Link className="text-gray-100" href="/contact" onClick={() => setOpen(false)}>
               Contact
-            </a>
+            </Link>
             <div className="mt-2 grid grid-cols-2 gap-3">
               <button
                 className="rounded-xl bg-white/5 px-3 py-2 text-gray-100 ring-1 ring-white/10 transition hover:bg-white/10"

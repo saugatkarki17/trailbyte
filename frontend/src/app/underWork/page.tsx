@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import SiteNav from "../components/SiteNav";
 import SiteFooter from "../components/SiteFooter";
 import { Wrench, Clock, Mail, Home } from "lucide-react";
@@ -12,8 +13,7 @@ export const metadata: Metadata = {
 
 export default function MaintenancePage() {
   const now = new Date().toLocaleString("en-US", {
-    // adjust if your site runs elsewhere
-    timeZone: "America/Los_Angeles",
+    timeZone: "America/New_York",
     month: "short",
     day: "2-digit",
     year: "numeric",
@@ -69,35 +69,35 @@ export default function MaintenancePage() {
                   <dt className="text-gray-300">Contact</dt>
                   <dd className="mt-1">
                     <a
-                      href="mailto:hello@trailbyte.co"
+                      href="mailto:hello@trailbyte.io"
                       className="font-medium text-[#F7F5EF] underline-offset-2 hover:underline"
                     >
-                      hello@trailbyte.io
+                      hello@trailbyte.co
                     </a>
                   </dd>
                 </div>
               </dl>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a
+                <Link
                   href="/"
                   className="inline-flex items-center gap-2 rounded-2xl bg-[#174A3A] px-6 py-3 text-sm text-[#F7F5EF] ring-1 ring-white/10 backdrop-blur-md transition hover:brightness-125"
                 >
                   <Home className="h-4 w-4" aria-hidden /> Return Home
-                </a>
+                </Link>
                 <a
                   href="mailto:hello@trailbyte.io?subject=Maintenance%20Question"
                   className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-sm text-gray-200/85 backdrop-blur-md transition hover:bg-white/10"
                 >
                   <Mail className="h-4 w-4" aria-hidden /> Email Support
                 </a>
-                {/* Optional: add a dedicated status page link if you have one
-                <a
+                {/* Optional: if you have an internal status page, use Link instead of <a>
+                <Link
                   href="/status"
                   className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-sm text-gray-200/85 backdrop-blur-md transition hover:bg-white/10"
                 >
                   <Activity className="h-4 w-4" aria-hidden /> View Status
-                </a>
+                </Link>
                 */}
               </div>
 

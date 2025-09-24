@@ -24,14 +24,39 @@ export default function ServicesPage() {
 
       {/* Grid */}
       <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-9">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <SolutionCard title="Trailbyte Cyber Shield" tag="Security" description="Elite cybersecurity—assessments, AI-driven monitoring, and rapid incident response." />
-          <SolutionCard title="Trailbyte Data Guard" tag="Data" description="Governed, privacy-safe data with policy, lineage, and risk detection built-in." />
-          <SolutionCard title="Trailbyte Digital Evolution" tag="Transformation" description="Cloud migration, automation, and adoption strategies that deliver measurable outcomes." />
-          <SolutionCard title="Trailbyte Virtualization" tag="Infrastructure" description="Scalable performance and flexibility with next-gen virtualization." />
-          <SolutionCard title="Trailbyte AI Readiness" tag="AI" description="Readiness assessment, bias mitigation, and governance for responsible AI." />
-          <SolutionCard title="Strategic CIO Advisory" tag="Advisory" description="Executive alignment of tech with business goals; board-ready reporting." />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <SolutionCard 
+            title="Trailbyte Cyber Shield" 
+            tag="Security" 
+            description="Security without the noise. Includes CIS/NIST gap assessment, 24/7 monitoring & triage, and incident response on retainer." 
+          />
+          <SolutionCard 
+            title="Trailbyte Data Guard" 
+            tag="Data" 
+            description="Governed, privacy-safe, AI-ready data. Includes inventory & lineage, access controls/DLP/SIEM alignment, and audit-ready evidence packs." 
+          />
+          <SolutionCard 
+            title="Trailbyte Digital Evolution" 
+            tag="Transformation" 
+            description="Modernization with guardrails. Includes cloud migration playbooks, workflow automation, and adoption & change management." 
+          />
+          <SolutionCard 
+            title="Trailbyte Virtualization Solutions" 
+            tag="Infrastructure" 
+            description="Consolidate, cut cost, and boost resilience. Includes capacity planning, backup/DR testing, and cost & performance dashboards." 
+          />
+          <SolutionCard 
+            title="Trailbyte AI Readiness" 
+            tag="AI" 
+            description="Responsible AI, from policy to pilots. Includes use-case triage, risk & bias controls, and governance & lifecycle plans." 
+          />
+          <SolutionCard 
+            title="Strategic CIO Advisory" 
+            tag="Advisory" 
+            description="Board-level clarity on demand. Includes quarterly roadmaps, budget planning, and risk narratives." 
+          />
         </div>
+
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <a href="/contact" className="rounded-2xl bg-[#174A3A] px-5 py-3 text-sm font-medium text-[#F7F5EF] shadow-[0_8px_30px_-12px_rgba(23,74,58,0.6)] transition hover:brightness-110">

@@ -30,6 +30,9 @@ export default function SiteNav() {
           <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/services">
             Services
           </Link>
+          <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/underWork">
+            Case Studies
+          </Link>
           <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/contact">
             Contact
           </Link>
@@ -37,11 +40,11 @@ export default function SiteNav() {
 
         {/* Desktop actions */}
         <div className="hidden items-center gap-3 md:flex">
-          <button className="rounded-xl border border-white/10 px-4 py-2 text-sm text-gray-200/85 backdrop-blur-sm transition hover:bg-white/10">
-            Log in
+          <button  className="rounded-xl border border-white/10 px-4 py-2 text-sm text-gray-200/85 backdrop-blur-sm transition hover:bg-white/10">
+            <a href="/underWork" className="px-3 py-2">Log in</a>
           </button>
           <button className="rounded-xl bg-[#174A3A] px-4 py-2 text-sm font-medium text-[#F7F5EF] shadow-[0_8px_30px_-10px_rgba(23,74,58,0.6)] transition hover:brightness-110">
-            Sign Up
+          <a href="/underWork" className="px-3 py-2">Sign up</a>
           </button>
         </div>
 
@@ -69,7 +72,9 @@ export default function SiteNav() {
             <Link className="text-gray-100" href="/services" onClick={() => setOpen(false)}>
               Services
             </Link>
-            
+            <Link className="text-sm text-gray-200/80 transition hover:text-white" href="/underWork">
+            Case Studies
+            </Link>
             <Link className="text-gray-100" href="/contact" onClick={() => setOpen(false)}>
               Contact
             </Link>

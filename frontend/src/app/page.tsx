@@ -13,7 +13,7 @@ import SiteFooter from "./components/SiteFooter";
 type ImageBandProps = {
   src: string;
   alt: string;
-  heightClass?: string; // e.g., "min-h-[20rem]"
+  heightClass?: string; 
   className?: string;
   children?: React.ReactNode;
 };
@@ -113,36 +113,32 @@ export default function Page() {
       <section className="relative z-10 mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-9 lg:pb-20">
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
           {/* Left: Title */}
-          <div>
-            <p className="mb-2 text-xs tracking-[0.2em] text-gray-200/60">
+          <div >
+            <p className="mb-4 text-xs tracking-[0.2em] text-gray-200/60">
               THE GUIDE FOR YOUR BUSINESS’S DIGITAL JOURNEY
             </p>
-            <h1 className="text-4xl font-extrabold leading-[1.05] text-[#F7F5EF] sm:text-5xl md:text-6xl">
-              <span className="block">Secured</span>
+            <h1 className="text-3xl font-extrabold md:mt-5  mb-5 md:mb-10 leading-[1.05] text-[#F7F5EF] sm:text-5xl md:text-5xl ">
+              <span className="block">From Cybersecurity to </span>
               <span className="block bg-gradient-to-r from-[#F7F5EF] via-white to-[#F7F5EF] bg-clip-text text-transparent">
-                Easy Servers
+              Data, Modernization & AI Readiness
               </span>
             </h1>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center md:gap-8 gap-4">
               <a
                 href="/services"
-                className="rounded-2xl bg-white/5 px-5 py-3 text-sm text-[#F7F5EF] ring-1 ring-white/10 backdrop-blur-md transition hover:bg-white/10"
+                className="rounded-2xl bg-[#174A3A] px-6 py-4 text-sm text-[#F7F5EF] ring-1 ring-white/10 backdrop-blur-md transition hover:brightness-140"
               >
-                Explore Services
+                Map Your Digital Journey
               </a>
-              <button className="group rounded-2xl border border-white/10 px-5 py-3 text-sm text-gray-200/85 backdrop-blur-md transition hover:bg-white/10">
+              <button className="group rounded-2xl border  bg-white/5 border-white/10 px-6 py-4 text-sm text-gray-200/85 backdrop-blur-md transition hover:bg-white/10">
                 <span className="bg-gradient-to-r from-white to-[#F7F5EF] bg-clip-text text-transparent">
-                  Request a Demo
+                See Sample Roadmap
                 </span>
               </button>
             </div>
 
-            {/* stats */}
-            <div className="mt-10 grid max-w-xl grid-cols-2 gap-4 text-left sm:gap-6">
-              <Stat label="Active Users" value="4.9K" />
-              <Stat label="Protected Servers" value="20K+" />
-            </div>
+            
           </div>
 
           {/* Right: Copy block */}
@@ -154,17 +150,18 @@ export default function Page() {
                 Top-Tier Security
               </div>
               <p className="text-base leading-7 text-gray-200">
-                Trailbyte delivers consulting and technology services that blend{" "}
+                Trailbyte helps you scale with confidence by delivering{" "}
                 <span className="mx-1 bg-gradient-to-r from-[#F7F5EF] to-white bg-clip-text font-medium text-transparent">
-                  innovation with resilience.
+                  secure foundations and data-driven insights.
                 </span>
-                Our solutions strengthen security, unlock data value, modernize infrastructure, and prepare organizations for the future of AI.
+                We protect your core operations, unlock the full potential of your data, and
+                guide your organization toward sustainable growth, modernization, and an AI-ready future.
               </p>
-
               <ul className="mt-6 grid gap-3 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2">
-                <Pill>Intrusion Detection</Pill>
-                <Pill>Server Integrity</Pill>
-                <Pill>End-to-End Encryption</Pill>
+              <Pill>Core Security</Pill>
+              <Pill>Data Value</Pill>
+              <Pill>AI Readiness</Pill>
+              <Pill>Sustainable Growth</Pill>
               </ul>
             </div>
           </div>
@@ -179,11 +176,11 @@ export default function Page() {
         <header className="mb-8">
           <p className="mb-2 text-xs tracking-[0.2em] text-gray-200/60">ABOUT TRAILBYTE</p>
           <h2 className="text-3xl font-bold text-[#F7F5EF] sm:text-4xl">
-            Driving Innovation in IT Solutions
+            Secure Modernization, Without the Noise
           </h2>
           <p className="mt-3 max-w-3xl text-gray-200">
-            Proven Track Record: <span className="font-semibold text-[#F7F5EF]">25 enterprise-scale implementations</span>.{" "}
-            We’ve also launched <span className="font-semibold text-[#F7F5EF]">24 new projects</span> tailored to client needs.
+            Proven Impact: <span className="font-semibold text-[#F7F5EF]">25 enterprise-scale implementations</span> and{" "}
+            <span className="font-semibold text-[#F7F5EF]">24 new projects</span> delivered across security, data, and cloud.
           </p>
         </header>
 
@@ -192,24 +189,31 @@ export default function Page() {
           <article className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full bg-gradient-to-tr from-[#174A3A]/30 via-[#174A3A]/15 to-transparent blur-2xl" />
             <h3 className="text-xl font-semibold text-[#F7F5EF]">
-              Engineering Expertise that Accelerates Growth
+              Guiding Secure, Data-Driven Modernization
             </h3>
             <p className="mt-3 text-sm leading-6">
-              Trailbyte is an IT consulting company dedicated to providing cutting-edge solutions for businesses. Our team of former engineers brings deep technical expertise to drive your business forward.
+              Trailbyte helps organizations modernize with confidence. We combine cybersecurity, data governance, cloud and virtualization strategies, AI readiness, and executive advisory to build solutions that last.
             </p>
             <p className="mt-3 text-sm leading-6">
-              Our commitment to innovation extends beyond technology. We are dedicated to driving positive change and progress within the industry.
+              Our core services include <span className="font-medium">Cyber Shield</span> for security assessments, continuous monitoring, and incident response.{" "}
+              <span className="font-medium">Data Guard</span> ensures privacy-safe, audit-ready data with full lineage and access controls.{" "}
+              <span className="font-medium">Digital Evolution</span> supports cloud migration, workflow automation, and change management.{" "}
+              <span className="font-medium">Virtualization Solutions</span> streamline infrastructure with cost savings, disaster recovery testing, and performance dashboards.{" "}
+              <span className="font-medium">AI Readiness</span> establishes responsible adoption with use-case reviews, risk controls, and governance.{" "}
+              Finally, <span className="font-medium">Strategic CIO Advisory</span> provides executive-level guidance through roadmaps, budgets, and risk strategies.
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center gap-3 md:gap-6">
               <a
-                href="/services"
-                className="rounded-2xl bg-[#174A3A] px-5 py-3 text-sm font-medium text-[#F7F5EF] shadow-[0_8px_30px_-12px_rgba(23,74,58,0.6)] transition hover:brightness-110"
+                href="/about"
+                className="rounded-2xl bg-[#174A3A] px-6 py-4 text-sm text-[#F7F5EF] ring-1 ring-white/10 backdrop-blur-md transition hover:brightness-140"
               >
                 Discover More
               </a>
-              <span className="rounded-2xl border border-white/10 px-4 py-2 text-xs uppercase tracking-widest text-gray-200/80">
-                Tailored Results
-              </span>
+              <button className="group rounded-2xl border bg-white/5 border-white/10 px-6 py-4 text-sm text-gray-200/85 backdrop-blur-md transition hover:bg-white/10">
+                <span className="bg-gradient-to-r from-white to-[#F7F5EF] bg-clip-text text-transparent">
+                  View Services
+                </span>
+              </button>
             </div>
           </article>
 
@@ -222,24 +226,24 @@ export default function Page() {
           >
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <FeatureCard
-                icon={<MountainIcon className="h-5 w-5 text-white" />}
-                title="Built for the Summit"
-                blurb="Strategy that scales as you climb—go from pilot to enterprise without losing footing."
-              />
-              <FeatureCard
-                icon={<CompassIcon className="h-5 w-5 text-white" />}
-                title="Guided by Outcomes"
-                blurb="Clear compass points: security, speed, and measurable ROI. No vendor noise."
+                icon={<ShieldIcon className="h-5 w-5 text-white" />}
+                title="Cyber Shield"
+                blurb="Security without the noise. Includes CIS/NIST gap assessment, 24/7 monitoring, and incident response on retainer."
               />
               <FeatureCard
                 icon={<PineIcon className="h-5 w-5 text-white" />}
-                title="Resilient by Design"
-                blurb="Sustainable architectures that bend, not break—rooted in governance."
+                title="Data Guard"
+                blurb="Governed, privacy-safe, AI-ready data with full lineage, access controls, and audit-ready evidence packs."
               />
               <FeatureCard
-                icon={<ShieldIcon className="h-5 w-5 text-white" />}
-                title="Enterprise-Ready"
-                blurb="25 major rollouts, 24 new projects launched—battle-tested delivery."
+                icon={<MountainIcon className="h-5 w-5 text-white" />}
+                title="Digital Evolution"
+                blurb="Modernization with guardrails through cloud migration playbooks, workflow automation, and change management."
+              />
+              <FeatureCard
+                icon={<CompassIcon className="h-5 w-5 text-white" />}
+                title="Virtualization Solutions"
+                blurb="Consolidate and cut costs while boosting resilience with capacity planning, DR testing, and performance dashboards."
               />
             </div>
           </BGPanel>
@@ -325,35 +329,35 @@ export default function Page() {
         </header>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <SolutionCard
-            title="Trailbyte Cyber Shield"
-            tag="Security"
-            description="Elite cybersecurity protection, beyond vendor bias. Full-spectrum assessments, AI-driven monitoring, and rapid incident response."
+            <SolutionCard 
+            title="Trailbyte Cyber Shield" 
+            tag="Security" 
+            description="Security without the noise. Includes CIS/NIST gap assessment, 24/7 monitoring & triage, and incident response on retainer." 
           />
-          <SolutionCard
-            title="Trailbyte Data Guard"
-            tag="Data"
-            description="Your data, governed, protected, and future-ready. Privacy compliance plus AI-powered risk detection to stay audit-ready and resilient."
+          <SolutionCard 
+            title="Trailbyte Data Guard" 
+            tag="Data" 
+            description="Governed, privacy-safe, AI-ready data. Includes inventory & lineage, access controls/DLP/SIEM alignment, and audit-ready evidence packs." 
           />
-          <SolutionCard
-            title="Trailbyte Digital Evolution"
-            tag="Transformation"
-            description="Transformation without the chaos. Cloud migration, process automation, and adoption strategies that deliver measurable outcomes."
+          <SolutionCard 
+            title="Trailbyte Digital Evolution" 
+            tag="Transformation" 
+            description="Modernization with guardrails. Includes cloud migration playbooks, workflow automation, and adoption & change management." 
           />
-          <SolutionCard
-            title="Trailbyte Virtualization Solutions"
-            tag="Infrastructure"
-            description="Scalable performance, reduced footprint. Consolidate infrastructure, optimize resources, and enhance flexibility with next-gen virtualization."
+          <SolutionCard 
+            title="Trailbyte Virtualization Solutions" 
+            tag="Infrastructure" 
+            description="Consolidate, cut cost, and boost resilience. Includes capacity planning, backup/DR testing, and cost & performance dashboards." 
           />
-          <SolutionCard
-            title="Trailbyte AI Readiness Assessment"
-            tag="AI"
-            description="Your roadmap to responsible AI. Assess readiness, mitigate bias, and design governance for ethical, scalable AI adoption."
+          <SolutionCard 
+            title="Trailbyte AI Readiness" 
+            tag="AI" 
+            description="Responsible AI, from policy to pilots. Includes use-case triage, risk & bias controls, and governance & lifecycle plans." 
           />
-          <SolutionCard
-            title="Trailbyte Strategic CIO Advisory"
-            tag="Advisory"
-            description="Executive-level IT leadership, on demand. Align tech strategy with business goals, with board-ready reporting and guidance."
+          <SolutionCard 
+            title="Strategic CIO Advisory" 
+            tag="Advisory" 
+            description="Board-level clarity on demand. Includes quarterly roadmaps, budget planning, and risk narratives." 
           />
         </div>
       </section>
@@ -369,22 +373,22 @@ export default function Page() {
             <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-12">
               {/* Left: copy */}
               <div className="md:col-span-5">
-                <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-widest text-gray-200/90">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5  px-4 py-2 text-[11px] uppercase tracking-widest text-gray-200/90">
                   Get in touch
                 </div>
-                <h3 className="text-2xl font-semibold text-[#F7F5EF]">Let’s talk security.</h3>
-                <p className="mt-2 max-w-[48ch] text-sm text-gray-100/95">
-                  Tell us where you are today and where you need to be. We’ll map a secure, practical path—no vendor noise.
+                <h3 className="text-2xl font-semibold md:text-3xl text-[#F7F5EF]">Chart your next path.</h3>
+                <p className="mt-2 max-w-[48ch] text-sm md:text-[15px] text-gray-100/95">
+                From cybersecurity to cloud to scale, we guide your toughest challenges with clarity, resilience, and speed.
                 </p>
 
-                <ul className="mt-4 space-y-2 text-sm text-gray-100/95">
-                  <li className="inline-flex items-center gap-2">
+                <ul className="mt-4 space-y-2 text-[14px] text-gray-100/95">
+                  <li className="inline-flex items-center md:mr-4 gap-1">
                     <MailIcon className="h-4 w-4" />{" "}
                     <a href="mailto:hello@trailbyte.io" className="underline-offset-2 hover:underline">
-                      hello@trailbyte.io
+                      hello@trailbyte.co
                     </a>
                   </li>
-                  <li className="inline-flex items-center gap-2">
+                  <li className="inline-flex items-center gap-1">
                     <ShieldIcon className="h-4 w-4" /> 24h response on active incidents
                   </li>
                 </ul>
@@ -395,11 +399,25 @@ export default function Page() {
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
+                    const form = e.currentTarget as HTMLFormElement;
+                    const data = new FormData(form);
+                    const name = (data.get("name") || "there") as string;
+                    const urgency = (data.get("urgency") || "Normal") as string;
+
                     const toast = document.getElementById("tb-contact-toast");
+                    const toastText = document.getElementById("tb-contact-toast-text");
+                    if (toastText) {
+                      toastText.textContent = `Thanks, ${name}. Your message has been sent. Urgency: ${urgency}. We’ll get back to you within one business day.`;
+                    }
                     if (toast) {
                       toast.classList.remove("opacity-0", "translate-y-2");
-                      setTimeout(() => toast.classList.add("opacity-0", "translate-y-2"), 3500);
+                      setTimeout(() => toast.classList.add("opacity-0", "translate-y-2"), 4000);
                     }
+
+                    form.reset();
+                    // reset default urgency after clear
+                    const urgencyEl = form.querySelector<HTMLSelectElement>('select[name="urgency"]');
+                    if (urgencyEl) urgencyEl.value = "Normal";
                   }}
                   className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm sm:p-5"
                 >
@@ -407,33 +425,50 @@ export default function Page() {
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <label className="flex flex-col gap-1">
-                      <span className="text-xs tracking-wide text-gray-100">Name</span>
+                      <span className="text-[14px] mb-1  tracking-wide text-gray-100">Name</span>
                       <input
                         type="text"
                         name="name"
                         className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none ring-0 transition focus:border-white/20"
-                        placeholder="Jane Doe"
+                        placeholder="Full Name"
                         required
                       />
                     </label>
                     <label className="flex flex-col gap-1">
-                      <span className="text-xs tracking-wide text-gray-100">Email</span>
+                      <span className="text-[14px] mb-1  tracking-wide text-gray-100">Email</span>
                       <input
                         type="email"
                         name="email"
                         className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none ring-0 transition focus:border-white/20"
-                        placeholder="jane@company.com"
+                        placeholder="example@company.com"
                         required
                       />
                     </label>
                     <label className="flex flex-col gap-1 sm:col-span-2">
-                      <span className="text-xs tracking-wide text-gray-100">Company / Website</span>
+                      <span className="text-[14px] mb-1  tracking-wide text-gray-100">Company / Website</span>
                       <input
                         type="text"
                         name="company"
                         className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none ring-0 transition focus:border-white/20"
-                        placeholder="Acme • acme.com"
+                        placeholder="Company Name"
                       />
+                    </label>
+
+                    {/* NEW: Urgency */}
+                    <label className="flex flex-col gap-1 sm:col-span-2">
+                      <span className="text-[14px] mb-1  tracking-wide text-gray-100">Urgency</span>
+                      <select
+                        name="urgency"
+                        defaultValue="Normal"
+                        className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none ring-0 transition focus:border-white/20"
+                        aria-label="Urgency"
+                        required
+                      >
+                        <option value="Low">Low — general inquiry</option>
+                        <option value="Normal">Normal — project discussion</option>
+                        <option value="High">High — time-sensitive</option>
+                        <option value="Critical">Critical — active incident</option>
+                      </select>
                     </label>
 
                     {/* Message + fun element */}
@@ -453,9 +488,12 @@ export default function Page() {
                   {/* toast */}
                   <div
                     id="tb-contact-toast"
-                    className="pointer-events-none absolute right-4 top-4 inline-flex items-center gap-2 rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-xs text-white opacity-0 shadow-sm backdrop-blur transition duration-300 ease-out translate-y-2"
+                    className="pointer-events-none absolute right-4 top-4 inline-flex items-center gap-2 rounded-xl border border-white/10 bg-[#174A3A] px-3 py-4 text-xs text-white opacity-0 shadow-sm backdrop-blur transition duration-300 ease-out translate-y-2"
+                    role="status"
+                    aria-live="polite"
                   >
-                    <CheckIcon className="h-4 w-4" /> Message queued securely
+                    <CheckIcon className="h-4 w-4" />
+                    <span id="tb-contact-toast-text">Message sent.</span>
                   </div>
                 </form>
               </div>
@@ -469,6 +507,7 @@ export default function Page() {
           `}</style>
         </ImageBand>
       </section>
+
 
       {/* Reusable FOOTER */}
       <SiteFooter />
@@ -588,13 +627,13 @@ function MessageWithMeter() {
 
   return (
     <label className="flex flex-col gap-1 sm:col-span-2">
-      <span className="text-xs tracking-wide text-gray-1000">Message</span>
+      <span className="text-[14px] mb-1 tracking-wide text-gray-1000">Message</span>
       <textarea
         name="message"
         rows={4}
         value={msg}
         onChange={(e) => setMsg(e.target.value)}
-        placeholder="What challenge can we help with?"
+        placeholder=" What challenge can we help solve?"
         className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none ring-0 transition focus:border-white/20"
         required
       />

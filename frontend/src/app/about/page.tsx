@@ -143,7 +143,7 @@ export default function AboutPage() {
         </ImageBand>
       </section>
 
-      {/* MILESTONES */}
+      {/* MILESTONES
       <section className="relative z-10 mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-9">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <KPI label="Enterprise Implementations" value="25" />
@@ -151,7 +151,7 @@ export default function AboutPage() {
           <KPI label="Protected Servers" value="20K+" />
           <KPI label="Active Users" value="4.9K" />
         </div>
-      </section>
+      </section> */}
 
       {/* STORY + BADGES */}
       <section id="method" className="relative z-10 mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-9">
@@ -160,14 +160,13 @@ export default function AboutPage() {
             <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full bg-gradient-to-tr from-[#174A3A]/30 via-[#174A3A]/15 to-transparent blur-2xl" />
             <h2 className="text-2xl font-semibold text-[#F7F5EF]">Our Trail</h2>
             <p className="mt-3 text-sm leading-6 text-gray-200">
-              From first discovery to scaled delivery, we focus on clarity and resilience. We help you
-              map real systems and risks, harden the core, and build the pathways that let teams ship faster—
-              all with governance baked in.
+              From trailhead to summit, we guide your journey with clarity, resilience, and governance at every step.
+              We help map risks, harden the core, and build pathways that let teams ship faster—without losing direction.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-2">
-              <Badge icon={<CompassIcon className="h-4 w-4" />}>Outcome-Guided</Badge>
-              <Badge icon={<MountainIcon className="h-4 w-4" />}>Scale-Ready</Badge>
-              <Badge icon={<ShieldIcon className="h-4 w-4" />}>Security-First</Badge>
+              <Badge icon={<CompassIcon className="h-4 w-4" />}>Guided</Badge>
+              <Badge icon={<MountainIcon className="h-4 w-4" />}>Scalable</Badge>
+              <Badge icon={<ShieldIcon className="h-4 w-4" />}>Secure</Badge>
             </div>
           </article>
 
@@ -181,27 +180,28 @@ export default function AboutPage() {
               <FeatureCard
                 icon={<PineIcon className="h-5 w-5 text-white" />}
                 title="Resilient by Design"
-                blurb="Architectures that bend, not break—rooted in governance and observability."
+                blurb="Adaptable architectures, built to endure—anchored in governance and observability."
               />
               <FeatureCard
                 icon={<CompassIcon className="h-5 w-5 text-white" />}
                 title="Clear Compass"
-                blurb="Security, speed, ROI: your north stars for every technical decision."
+                blurb="Security, speed, and ROI: the north stars guiding every technical decision."
               />
               <FeatureCard
                 icon={<MountainIcon className="h-5 w-5 text-white" />}
                 title="Summit-Ready"
-                blurb="From pilot to enterprise scale without re-platforming chaos."
+                blurb="Scale smoothly from pilot projects to enterprise rollouts—without re-platforming chaos."
               />
               <FeatureCard
                 icon={<ShieldIcon className="h-5 w-5 text-white" />}
-                title="Enterprise-Proven"
-                blurb="25 rollouts, 24 new builds—battle-tested delivery patterns."
+                title="Trail-Tested"
+                blurb="Decades of leadership delivering enterprise-grade outcomes—applied to your toughest challenges."
               />
             </div>
           </BGPanel>
         </div>
       </section>
+
 
       {/* VALUES GRID */}
       <section className="relative z-10 mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-9">

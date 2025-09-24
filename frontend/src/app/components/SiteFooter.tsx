@@ -57,7 +57,7 @@ export default function SiteFooter() {
               <li><Link href="/about" className="hover:underline underline-offset-2">About</Link></li>
               <li><Link href="/services" className="hover:underline underline-offset-2">Services</Link></li>
               <li><Link href="/contact" className="hover:underline underline-offset-2">Contact</Link></li>
-              <li><a href="#" className="hover:underline underline-offset-2">Careers</a></li>
+              <li><a href="#" className="hover:underline underline-offset-2">Case Studies</a></li>
             </ul>
           </div>
 
@@ -66,11 +66,11 @@ export default function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm text-gray-200/85">
               <li className="inline-flex items-center gap-2">
                 <MailIcon className="h-4 w-4" />{" "}
-                <a href="mailto:hello@trailbyte.io" className="hover:underline underline-offset-2">
+                <a href="mailto:hello@trailbyte.co" className="hover:underline underline-offset-2">
                   hello@trailbyte.io
                 </a>
               </li>
-              <li>San Francisco, CA</li>
+              
             </ul>
           </div>
         </div>

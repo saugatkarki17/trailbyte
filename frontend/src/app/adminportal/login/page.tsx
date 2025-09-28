@@ -7,18 +7,19 @@ import { auth } from "../../../../fbservices/firebaseClient";
 
 export default function AdminLogin() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
-  const [err, setErr] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [pw, setPw] = useState<string>("");
+  const [err, setErr] = useState<string>("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErr("");
     try {
       await signInWithEmailAndPassword(auth, email, pw);
       router.replace("/adminportal");
-    } catch (error: any) {
-      setErr(error?.message ?? "Login failed");
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Login failed";
+      setErr(message);
     }
   };
 
@@ -49,7 +50,7 @@ export default function AdminLogin() {
           placeholder="Admin email"
           className="mb-2 w-full rounded-xl border border-white/10 bg-black/30 p-3 text-white outline-none"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.currentTarget.value)}
           required
         />
         <input
@@ -57,7 +58,7 @@ export default function AdminLogin() {
           placeholder="Password"
           className="mb-4 w-full rounded-xl border border-white/10 bg-black/30 p-3 text-white outline-none"
           value={pw}
-          onChange={(e) => setPw(e.target.value)}
+          onChange={(e) => setPw(e.currentTarget.value)}
           required
         />
         <button

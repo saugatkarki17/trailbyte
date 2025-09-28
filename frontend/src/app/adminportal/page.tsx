@@ -8,6 +8,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "../../../fbservices/firebaseClient";
 
@@ -20,7 +21,7 @@ type ClientDoc = {
   name?: string;
   company?: string;
   status?: string; // 'active' or other
-  createdAt?: any; // Firestore Timestamp
+  createdAt?: Timestamp | Date | null; // Firestore Timestamp
 };
 
 type MessageDoc = {
@@ -32,8 +33,11 @@ type MessageDoc = {
   urgency?: "Low" | "Normal" | "High" | "Critical";
   status?: "new" | "open" | "done" | "in_progress" | "closed";
   read?: boolean;
-  createdAt?: any; // Firestore Timestamp
+  createdAt?: Timestamp | Date | null; // Firestore Timestamp
 };
+
+type DayBucket = { key: string; date: Date; count: number };
+type UrgencyCounts = Record<"Low" | "Normal" | "High" | "Critical", number>;
 
 /* ------------------------------
    Helpers
@@ -41,27 +45,28 @@ type MessageDoc = {
 
 const DAYS = 14;
 
-function toDate(v: any): Date | null {
-  // supports Firestore Timestamp or native Date or undefined
+function toDate(v: Timestamp | Date | null | undefined): Date | null {
   if (!v) return null;
-  if (typeof v.toDate === "function") return v.toDate() as Date;
+  // Firestore Timestamp has a toDate() method
+  // (narrowing via 'in' ensures we don't reference function on Date)
+  if (typeof (v as Timestamp).toDate === "function") return (v as Timestamp).toDate();
   if (v instanceof Date) return v;
   return null;
 }
 
-function startOfDay(d: Date) {
+function startOfDay(d: Date): Date {
   const x = new Date(d);
   x.setHours(0, 0, 0, 0);
   return x;
 }
 
-function formatDayMMDD(d: Date) {
+function formatDayMMDD(d: Date): string {
   return `${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}`;
 }
 
-function lastNDaysBuckets(n = DAYS) {
+function lastNDaysBuckets(n: number = DAYS): DayBucket[] {
   const today = startOfDay(new Date());
-  const days: { key: string; date: Date; count: number }[] = [];
+  const days: DayBucket[] = [];
   for (let i = n - 1; i >= 0; i--) {
     const d = new Date(today);
     d.setDate(today.getDate() - i);
@@ -70,7 +75,7 @@ function lastNDaysBuckets(n = DAYS) {
   return days;
 }
 
-function bumpBucket(buckets: { key: string; date: Date; count: number }[], when: Date | null) {
+function bumpBucket(buckets: DayBucket[], when: Date | null): void {
   if (!when) return;
   const dayKey = startOfDay(when).toISOString();
   const idx = buckets.findIndex((b) => b.key === dayKey);
@@ -83,19 +88,19 @@ function bumpBucket(buckets: { key: string; date: Date; count: number }[], when:
 
 export default function AdminHome() {
   // Clients
-  const [clientsTotal, setClientsTotal] = useState(0);
-  const [clientsActive, setClientsActive] = useState(0);
-  const [clientsSeries, setClientsSeries] = useState<{ key: string; date: Date; count: number }[]>(
+  const [clientsTotal, setClientsTotal] = useState<number>(0);
+  const [clientsActive, setClientsActive] = useState<number>(0);
+  const [clientsSeries, setClientsSeries] = useState<DayBucket[]>(
     lastNDaysBuckets()
   );
 
   // Messages
-  const [msgsTotal, setMsgsTotal] = useState(0);
-  const [msgsUnread, setMsgsUnread] = useState(0);
-  const [msgsSeries, setMsgsSeries] = useState<{ key: string; date: Date; count: number }[]>(
+  const [msgsTotal, setMsgsTotal] = useState<number>(0);
+  const [msgsUnread, setMsgsUnread] = useState<number>(0);
+  const [msgsSeries, setMsgsSeries] = useState<DayBucket[]>(
     lastNDaysBuckets()
   );
-  const [urgencyCounts, setUrgencyCounts] = useState<Record<string, number>>({
+  const [urgencyCounts, setUrgencyCounts] = useState<UrgencyCounts>({
     Low: 0,
     Normal: 0,
     High: 0,
@@ -137,7 +142,7 @@ export default function AdminHome() {
       (snap) => {
         let total = 0;
         let unread = 0;
-        const uCounts = { Low: 0, Normal: 0, High: 0, Critical: 0 };
+        const uCounts: UrgencyCounts = { Low: 0, Normal: 0, High: 0, Critical: 0 };
         const series = lastNDaysBuckets();
 
         const recents: MessageDoc[] = [];
@@ -146,10 +151,8 @@ export default function AdminHome() {
           total++;
           const isUnread = data.read === false || data.read === undefined;
           if (isUnread) unread++;
-          const u = data.urgency ?? "Normal";
-          if (uCounts[u as keyof typeof uCounts] !== undefined) {
-            uCounts[u as keyof typeof uCounts] += 1;
-          }
+          const u = (data.urgency ?? "Normal") as keyof UrgencyCounts;
+          uCounts[u] += 1;
           bumpBucket(series, toDate(data.createdAt));
           if (recents.length < 6) recents.push(data);
         });
@@ -170,7 +173,10 @@ export default function AdminHome() {
     return (msgsTotal - msgsUnread) / msgsTotal;
   }, [msgsTotal, msgsUnread]);
 
-  const unreadRate = useMemo(() => (msgsTotal === 0 ? 0 : msgsUnread / msgsTotal), [msgsTotal, msgsUnread]);
+  const unreadRate = useMemo(
+    () => (msgsTotal === 0 ? 0 : msgsUnread / msgsTotal),
+    [msgsTotal, msgsUnread]
+  );
 
   return (
     <Guard>
@@ -193,7 +199,9 @@ export default function AdminHome() {
                 value={clientsSeries.reduce((a, b) => a + b.count, 0)}
                 sub={`${clientsActive} active / ${clientsTotal} total`}
               >
-                <Sparkline data={clientsSeries.map((d) => d.count)} labels={clientsSeries.map((d) => formatDayMMDD(d.date))} />
+                <Sparkline
+                  data={clientsSeries.map((d) => d.count)}
+                />
               </StatCard>
 
               <StatCard
@@ -201,7 +209,9 @@ export default function AdminHome() {
                 value={msgsSeries.reduce((a, b) => a + b.count, 0)}
                 sub={`${msgsUnread} unread / ${msgsTotal} total`}
               >
-                <Sparkline data={msgsSeries.map((d) => d.count)} labels={msgsSeries.map((d) => formatDayMMDD(d.date))} />
+                <Sparkline
+                  data={msgsSeries.map((d) => d.count)}
+                />
               </StatCard>
 
               <RingCard title="Read Rate" value={Math.round(readRate * 100)} caption={`${msgsTotal - msgsUnread} read`} />
@@ -264,7 +274,7 @@ function StatCard({
   );
 }
 
-function Sparkline({ data, labels }: { data: number[]; labels?: string[] }) {
+function Sparkline({ data }: { data: number[] }) {
   // Simple inline SVG sparkline
   const width = 220;
   const height = 46;
@@ -332,13 +342,13 @@ function RingCard({ title, value, caption }: { title: string; value: number; cap
   );
 }
 
-function UrgencyCard({ counts }: { counts: Record<string, number> }) {
+function UrgencyCard({ counts }: { counts: UrgencyCounts }) {
   const total = Object.values(counts).reduce((a, b) => a + b, 0) || 1;
-  const items: Array<{ label: string; key: keyof typeof counts; cls: string }> = [
-    { label: "Critical", key: "Critical", cls: "bg-rose-400" },
-    { label: "High", key: "High", cls: "bg-amber-400" },
-    { label: "Normal", key: "Normal", cls: "bg-slate-400" },
-    { label: "Low", key: "Low", cls: "bg-emerald-400" },
+  const items: Array<{ label: keyof UrgencyCounts; cls: string }> = [
+    { label: "Critical", cls: "bg-rose-400" },
+    { label: "High", cls: "bg-amber-400" },
+    { label: "Normal", cls: "bg-slate-400" },
+    { label: "Low", cls: "bg-emerald-400" },
   ];
 
   return (
@@ -346,13 +356,15 @@ function UrgencyCard({ counts }: { counts: Record<string, number> }) {
       <h3 className="text-[12px] uppercase tracking-[0.2em] text-gray-300">Urgency</h3>
       <ul className="mt-4 space-y-3">
         {items.map((it) => {
-          const n = counts[it.key] || 0;
+          const n = counts[it.label] || 0;
           const pct = Math.round((n / total) * 100);
           return (
             <li key={it.label}>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-200">{it.label}</span>
-                <span className="text-gray-300">{n} • {pct}%</span>
+                <span className="text-gray-300">
+                  {n} • {pct}%
+                </span>
               </div>
               <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-white/10">
                 <div
@@ -399,7 +411,7 @@ function RecentMessagesCard({ items }: { items: MessageDoc[] }) {
                     </p>
                   </div>
                   <div className="text-[11px] text-gray-400">
-                    {m.createdAt?.toDate ? m.createdAt.toDate().toLocaleDateString() : ""}
+                    {m.createdAt && toDate(m.createdAt)?.toLocaleDateString()}
                   </div>
                 </div>
               </a>

@@ -7,24 +7,28 @@ import { updatePassword } from "firebase/auth";
 import { auth } from "../../../../fbservices/firebaseClient";
 
 export default function ProfilePage() {
-  const [pw, setPw] = useState("");
+  const [pw, setPw] = useState<string>("");
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  const changePw = async (e: React.FormEvent) => {
+  const changePw = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMsg(null); setErr(null);
+    setMsg(null);
+    setErr(null);
+
     const user = auth.currentUser;
     if (!user) {
       setErr("No active session.");
       return;
     }
+
     try {
       await updatePassword(user, pw);
       setMsg("Password updated.");
       setPw("");
-    } catch (e: any) {
-      setErr(e?.message ?? "Failed to update password.");
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Failed to update password.";
+      setErr(message);
     }
   };
 
@@ -37,9 +41,7 @@ export default function ProfilePage() {
             🛡️ Profile
           </div>
           <h1 className="text-2xl font-bold text-[#F7F5EF]">Account Security</h1>
-          <p className="mt-2 text-sm text-gray-200">
-            Update your admin password below.
-          </p>
+          <p className="mt-2 text-sm text-gray-200">Update your admin password below.</p>
 
           <form onSubmit={changePw} className="mt-6 max-w-md">
             {msg && (
@@ -59,7 +61,7 @@ export default function ProfilePage() {
               type="password"
               className="mb-4 w-full rounded-xl border border-white/10 bg-black/30 p-3 text-white outline-none"
               value={pw}
-              onChange={(e) => setPw(e.target.value)}
+              onChange={(e) => setPw(e.currentTarget.value)}
               minLength={6}
               required
             />

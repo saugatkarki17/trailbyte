@@ -1,8 +1,8 @@
 "use client";
 
+import React, { useEffect, useMemo, useState } from "react";
 import Guard from "../_components/Guard";
 import AdminShell from "../_components/AdminShell";
-import { useEffect, useMemo, useState } from "react";
 import {
   collection,
   onSnapshot,
@@ -13,6 +13,7 @@ import {
   deleteDoc,
   doc,
   serverTimestamp,
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "../../../../fbservices/firebaseClient";
 
@@ -22,19 +23,19 @@ type Client = {
   email: string;
   company?: string;
   status?: "new" | "active" | "paused" | "inactive";
-  createdAt?: any;
+  createdAt?: Timestamp | null;
 };
 
-const CLIENTS_COLLECTION = "clients"; // <- rename if your collection differs
+const CLIENTS_COLLECTION = "clients";
 
 export default function ClientsPage() {
   const [rows, setRows] = useState<Client[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // form state (create or edit)
   const [form, setForm] = useState<Partial<Client>>({});
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // subscribe realtime
@@ -44,14 +45,11 @@ export default function ClientsPage() {
       q,
       (snap) => {
         const out: Client[] = [];
-        snap.forEach((d) =>
-          out.push({ id: d.id, ...(d.data() as Omit<Client, "id">) })
-        );
+        snap.forEach((d) => out.push({ id: d.id, ...(d.data() as Omit<Client, "id">) }));
         setRows(out);
         setLoading(false);
       },
-      (e) => {
-        console.error(e);
+      () => {
         setError("Failed to load clients.");
         setLoading(false);
       }
@@ -75,7 +73,7 @@ export default function ClientsPage() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSaving(true);
     setError(null);
@@ -83,7 +81,7 @@ export default function ClientsPage() {
       const payload = {
         name: form.name?.trim() || "",
         email: form.email?.trim() || "",
-        company: form.company?.toString().trim() || "",
+        company: (form.company ?? "").toString().trim(),
         status: (form.status as Client["status"]) || "active",
         ...(editingId ? {} : { createdAt: serverTimestamp() }),
       };
@@ -100,9 +98,10 @@ export default function ClientsPage() {
         await addDoc(collection(db, CLIENTS_COLLECTION), payload);
       }
       resetForm();
-    } catch (e: any) {
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Save failed.";
       console.error(e);
-      setError(e?.message ?? "Save failed.");
+      setError(msg);
     } finally {
       setSaving(false);
     }
@@ -112,7 +111,7 @@ export default function ClientsPage() {
     if (!confirm("Delete this client?")) return;
     try {
       await deleteDoc(doc(db, CLIENTS_COLLECTION, id));
-    } catch (e) {
+    } catch (e: unknown) {
       console.error(e);
       alert("Delete failed.");
     }
@@ -196,7 +195,6 @@ export default function ClientsPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-widest text-gray-200/70">
               👥 Clients
             </div>
-            {/* Create / Update form trigger area lives inline below */}
           </header>
 
           {/* Create / Edit form */}
@@ -225,9 +223,7 @@ export default function ClientsPage() {
             <select
               className="rounded-xl border border-white/10 bg-black/30 p-3 text-sm text-white outline-none sm:col-span-1"
               value={form.status ?? "active"}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, status: e.target.value as Client["status"] }))
-              }
+              onChange={(e) => setForm((f) => ({ ...f, status: e.target.value as Client["status"] }))}
             >
               <option value="new">new</option>
               <option value="active">active</option>

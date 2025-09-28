@@ -11,6 +11,7 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  Timestamp, // <-- add this
 } from "firebase/firestore";
 import { db } from "../../../../fbservices/firebaseClient";
 
@@ -22,7 +23,7 @@ type Msg = {
   message?: string;
   status?: "new" | "open" | "done" | "in_progress" | "closed";
   urgency?: "Low" | "Normal" | "High" | "Critical";
-  createdAt?: any; // Firestore Timestamp
+  createdAt?: Timestamp | null; // <-- no 'any'
   read?: boolean;
 };
 
@@ -30,7 +31,7 @@ const COLLECTION = "contactMessages";
 
 export default function MessagesPage() {
   const [rows, setRows] = useState<Msg[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const q = query(collection(db, COLLECTION), orderBy("createdAt", "desc"));
@@ -42,8 +43,7 @@ export default function MessagesPage() {
         setRows(out);
         setLoading(false);
       },
-      (e) => {
-        console.error(e);
+      () => {
         setLoading(false);
       }
     );
@@ -69,7 +69,7 @@ export default function MessagesPage() {
     }
   };
 
-  const urgencyClass = (u?: Msg["urgency"]) => {
+  const urgencyClass = (u?: Msg["urgency"]): string => {
     switch (u) {
       case "Critical":
         return "border-rose-400/40 bg-rose-400/10 text-rose-100";
@@ -106,10 +106,8 @@ export default function MessagesPage() {
                 key={m.id}
                 className={`relative overflow-hidden rounded-3xl border px-0 py-0 backdrop-blur-sm transition hover:-translate-y-0.5 ${
                   unread
-                    // UNREAD → keep the darker look (same as your previous "read" card)
-                    ? "border-white/15 bg-white/[0.04]"
-                    // READ → a touch lighter and slightly faded until hover
-                    : "border-white/10 bg-white/10 opacity-80 hover:opacity-100"
+                    ? "border-white/15 bg-gray/[0.04]" // UNREAD: darker (stable)
+                    : "border-white/10 bg-black/10 opacity-45 hover:opacity-100" // READ: lighter + slight fade
                 }`}
               >
                 {/* Thin left gradient accent only for UNREAD */}

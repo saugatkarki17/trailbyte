@@ -1,23 +1,56 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebaseClient";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 
 type Urgency = "Low" | "Normal" | "High" | "Critical";
 
-export async function saveContactMessage({
-  name, email, company, urgency, message, company_website,
-}: {
-  name: string; email: string; company?: string; urgency: Urgency; message: string; company_website?: string;
+export async function saveContactMessage(input: {
+  name: string;
+  email: string;
+  company?: string;
+  urgency: Urgency;
+  message: string;
+  company_website?: string; // honeypot
 }) {
-  // honeypot spam check
-  if (company_website && company_website.trim()) return;
+  const { name, email, company, urgency, message, company_website } = input;
 
+  // honeypot: silently accept but do nothing
+  if (company_website && company_website.trim() !== "") return;
+
+  const createdAt = serverTimestamp();
+
+  // 1) save the public message (this must succeed)
   await addDoc(collection(db, "contactMessages"), {
-    name: name.trim().slice(0, 120),
-    email: email.trim().toLowerCase().slice(0, 160),
-    company: company ? company.trim().slice(0, 200) : null,
+    name,
+    email,
+    company: company ?? "",
     urgency,
-    message: message.trim().slice(0, 5000),
-    status: "new",                // optional (allowed by rules)
-    createdAt: serverTimestamp(), // optional (allowed by rules)
+    message,
+    status: "new",
+    read: false,
+    createdAt,
   });
+
+  // 2) best-effort upsert into clients (rules require docId == lower-cased email, limited fields)
+  const emailId = email.trim().toLowerCase();
+  try {
+    await setDoc(
+      doc(db, "clients", emailId),
+      {
+        email: emailId,
+        name,
+        company: company ?? "",
+        createdAt,
+      },
+      { merge: true } // allow later admin edits
+    );
+  } catch (e) {
+    // do not block user if this fails (rules might be tighter or race conditions)
+    console.warn("[clients upsert failed]", e);
+  }
 }
